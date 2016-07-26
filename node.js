@@ -64,8 +64,11 @@ app.use(logger('dev'));  // 'default', 'short', 'tiny', 'dev'
 // use compression (gzip) to reduce size of HTTP responses
 app.use(compression());
 
+// Setup for rendering csurf token into index.html at app-startup
+app.engine('.html', require('ejs').__express);
+app.set('views', __dirname + '/public');
+
 app.get('/index.html', function(req, res) {
-    // req.csrfToken() returns a fresh random CSRF token value
     res.render('index.html');
 });
 
