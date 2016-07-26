@@ -6,7 +6,7 @@
 var fullstack =  fullstack || {};
 
 // note View-name (Home) matches name of template file Home.html
-fullstack.Home = Backbone.View.extend({
+fullstack.SignIn = Backbone.View.extend({
 
     // render the View
     render: function () {

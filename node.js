@@ -6,7 +6,7 @@
  *
  * require() loads a nodejs "module" - basically a file.  Anything
  * exported from that file (with "exports") can now be dotted off
- * the value returned by require(), in this case e.g. splat.api
+ * the value returned by require(), in this case e.g. fullstack.api
  * The convention is use the same name for variable and module.
  */
 var https = require("http"),   // ADD CODE
