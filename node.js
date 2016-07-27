@@ -12,45 +12,18 @@
 var https = require("http"),   // ADD CODE
 // NOTE, use the version of "express" linked to the assignment handout
     express = require("express"),   // ADD CODE
-    fs = require("fs"),
-    path = require("path"),
     url = require("url"),
-    multer = require("multer"),
     logger = require("morgan"),
     compression = require("compression"),
-    session = require("express-session"),
-    bodyParser = require("body-parser"),
-    methodOverride = require("method-override"),
-    directory = require("serve-index"),
     errorHandler = require("errorhandler"),
-
-
-    //cross site attack security optional after
-    csurf= require('csurf'),// optional, for HTTP auth
 
     // config is an object module, that defines app-config attribues,
     // such as "port", DB parameters
     config = require("./config"),
     testNode = require('./routes/testNode.js')
 
-// middleware check that req is associated with an authenticated session
-function isAuthd(req, res, next) {
-    if(req.session.auth){
-        return next();
-    }
-    else{
-        res.status(403).send("please signin to countinue your application.")
-    }
-};
-
-
 var app = express();  // Create Express app server
 
-// Configure app server
-app.use(function (req,res,next){
-    res.setHeader("Strict-Transport-Security","max-age=36000");
-    next();
-});
 // use PORT environment variable, or local config file value
 app.set('port', process.env.PORT || config.port);
 
@@ -68,12 +41,13 @@ app.use(compression());
 app.engine('.html', require('ejs').__express);
 app.set('views', __dirname + '/public');
 
-app.get('/index.html', function(req, res) {
-    res.render('index.html');
-});
-
-
 app.get('/', testNode.api);
+
+app.get('/index.html', testNode.index);
+
+app.get('/receive_code/', testNode.receive_code);
+
+app.get('/index.html/detail/', testNode.detail);
 
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- set charset to interpret file contents -->
+    <!-- ... ADD CODE ... -->
+    <meta charset="UTF-8">
+    <!-- title displayed when browser tab is moused over -->
+    <title>FullStack</title>
+    <!-- ensure proper rendering and touch zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <!-- Bootstrap CSS definitions -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <!-- optional stylesheet theme included with Bootstrap -->
+    <link href="../css/bootstrap-theme.css" rel="stylesheet">
+    <!-- your own customized style rules -->
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="../js/lib/backbone-min.js" type="text/javascript"></script>
+    <script src="../js/lib/bootstrap-min.js" type="text/javascript"></script>
+    <script src="../js/lib/jquery-min.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!-- HTML5 markup for view content, labelled with Bootstrap class names -->
+<header class="header"></header>
+
+<!-- full-width content container, spanning entire viewport -->
+<main class="container-fluid">
+    <!-- row for use in Bootstrap grid layout -->
+    <div>
+        <a href="https://api.23andme.com/authorize/?redirect_uri=http://localhost:5000/receive_code/&response_type=code&client_id=62dfa95af83bfcfbb834dcd05c31c67b&scope=basic names">
+            <button type="button" class="btn btn-lg home-btn">
+                Connect 23andMe
+            </button>
+        </a>
+    </div>
+
+</main>  <!-- container-fluid -->
+<!-- load scripts last for better UI performance -->
+<footer class="footer" >
+    <p>&copy; Ryan Pan</p></footer>
+
+<!-- library scripts you use -->
+</body>
+</html>
