@@ -12,11 +12,6 @@ var config = {
 
 	TTAM_token_url: 'https://api.23andme.com/token/',
 	TTAM_info_url: 'https://api.23andme.com/1',
-
-	//testing db
-	//mongo ds029735.mlab.com:29735/athleticgen -u a -p a
-	db: 'mongodb://a:a@ds029735.mlab.com:29735/athleticgen',
-
 }
 
 module.exports = config;
