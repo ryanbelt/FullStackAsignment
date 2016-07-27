@@ -26,6 +26,7 @@
 <!-- full-width content container, spanning entire viewport -->
 <main class="container-fluid">
     <!-- row for use in Bootstrap grid layout -->
+    <div><%- error%></div>
     <div>
         <a href="https://api.23andme.com/authorize/?redirect_uri=<%- redirect_uri%>&response_type=code&client_id=<%- client_id%>&scope=<%- scope%>">
             <button type="button" class="btn btn-lg home-btn">

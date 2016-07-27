@@ -4,7 +4,8 @@ var fs = require('fs'),
     config = require(__dirname + '/../config'),  // port#, other params
     express = require("express"),
     url = require("url"),
-    request = require("request");
+    request = require("request"),
+    async = require("async");
 
 
 exports.api = function(req, res){
@@ -13,6 +14,7 @@ exports.api = function(req, res){
 
 exports.index = function(req, res){
     res.render('tpl/index.html',{
+        error: '',
         client_id: config.client_id,
         redirect_uri: config.redirect_uri,
         scope: config.scope
@@ -22,10 +24,15 @@ exports.index = function(req, res){
 exports.receive_code = function(req, res){
     //if not gain access, re-render index
     if(!req.query.code){
-        res.render('index.html');
+        res.render('tpl/index.html',{
+            error:"grant access Fail",
+            client_id: config.client_id,
+            redirect_uri: config.redirect_uri,
+            scope: config.scope
+        });
     }else{
         request.post({
-            url: 'https://api.23andme.com/token/',
+            url: config.TTAM_token_url,
             form: {
                 client_id: config.client_id,
                 client_secret: config.client_secret,
@@ -47,5 +54,51 @@ exports.receive_code = function(req, res){
 };
 
 exports.detail = function(req, res){
-    console.log(req.session);
-}
+    if(req.session.access_token){
+        var auths = {Authorization: 'Bearer ' + req.session.access_token};
+        async.parallel([
+            function(callback) {
+                request.get({
+                    wait: true,
+                    url: config.TTAM_info_url + '/names/',
+                    headers: auths,
+                    json: true
+                }, function (e, r, body) {
+                    if (r.statusCode != 200) {
+                        callback(true);
+                        return;
+                    } else {
+                        callback(false,{name:body.first_name + ' ' + body.last_name,
+                                        profile : body.profiles[0].id});
+                    }
+                });
+            },
+            function(callback) {
+                request.get({
+                    wait: true,
+                    url: config.TTAM_info_url + '/user/?email=true',
+                    headers: auths,
+                    json: true
+                }, function (e, r, body) {
+                    if (r.statusCode != 200) {
+                        callback(true);
+                        return;
+                    } else {
+                        callback(false,{email: body.email});
+                    }
+                });
+            },
+        ],
+            function(err, result){
+                if(err){
+                    req.session.access_token = null;
+                    res.redirect('/index.html');
+                }
+                var merge={};
+                for(var key in result[0]) merge[key]=result[0][key];
+                for(var key in result[1]) merge[key]=result[1][key];
+                res.render('tpl/detail.html',merge);
+            }
+        );
+    }
+};
