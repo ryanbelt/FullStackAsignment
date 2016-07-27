@@ -16,7 +16,7 @@ var https = require("http"),   // ADD CODE
     logger = require("morgan"),
     compression = require("compression"),
     errorHandler = require("errorhandler"),
-
+    session = require("express-session"),
     // config is an object module, that defines app-config attribues,
     // such as "port", DB parameters
     config = require("./config"),
@@ -27,8 +27,14 @@ var app = express();  // Create Express app server
 // use PORT environment variable, or local config file value
 app.set('port', process.env.PORT || config.port);
 
-// activate basic HTTP authentication (to protect your solution files)
-//app.use(basicAuth('username', 'password'));  // REPLACE username/password
+//set cookie
+app.use(session({
+    name: config.sessionKey,
+    secret: config.sessionSecret,
+    cookie:{maxAge:config.sessionTimeout},
+    saveUninitialized: false,
+    resave: false
+}));
 
 
 // change param value to control level of logging  ... ADD CODE
@@ -47,7 +53,7 @@ app.get('/index.html', testNode.index);
 
 app.get('/receive_code/', testNode.receive_code);
 
-app.get('/index.html/detail/', testNode.detail);
+app.get('/detail.html', testNode.detail);
 
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
 

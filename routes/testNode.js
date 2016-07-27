@@ -12,7 +12,11 @@ exports.api = function(req, res){
 };
 
 exports.index = function(req, res){
-    res.render('tpl/index.html');
+    res.render('tpl/index.html',{
+        client_id: config.client_id,
+        redirect_uri: config.redirect_uri,
+        scope: config.scope
+    });
 };
 
 exports.receive_code = function(req, res){
@@ -27,13 +31,14 @@ exports.receive_code = function(req, res){
                 client_secret: config.client_secret,
                 grant_type: 'authorization_code',
                 code: req.query.code,
-                redirect_uri: config.redirected_url,
+                redirect_uri: config.redirect_uri,
                 scope: config.scope
             },
             json: true}, function(e, r, body){
             if (!e && r.statusCode == 200) {
-                res.cookie('access_token', body.access_token);
-                res.redirect('/');
+                console.log(req.session.cookie);
+                req.session.access_token= body.access_token;
+                res.redirect('/detail.html');
             } else {
                 res.send(body);
             }
@@ -42,5 +47,5 @@ exports.receive_code = function(req, res){
 };
 
 exports.detail = function(req, res){
-    console.log(req.access_token);
+    console.log(req.session);
 }
