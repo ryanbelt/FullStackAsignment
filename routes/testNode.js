@@ -1,8 +1,6 @@
 var fs = require('fs'),
 // path is "../" since splat.js is in routes/ sub-dir
-    bcrypt = require("bcrypt"),
     config = require(__dirname + '/../config'),  // port#, other params
-    express = require("express"),
     url = require("url"),
     request = require("request"),
     async = require("async");
