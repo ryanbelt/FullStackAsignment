@@ -1,4 +1,5 @@
 # FullStackAsignment
+It is a web application using Nodejs which allow user to authenticate with 23andme and show user’s informations.
 
 ## Installation
 ```bash
