@@ -26,16 +26,31 @@
 <!-- full-width content container, spanning entire viewport -->
 <main class="container-fluid">
     <!-- row for use in Bootstrap grid layout -->
-    <div>
-        <p>Name: <%- name%></p>
-        <p>Email: <%- email%></p>
-        <p>Profile: <%- profile%></p>
+    <div class="middle-div">
+        <div class="form-group">
+            <div class="index-text  col-sm-4">Name:</div>
+            <div class="content-text col-sm-8">
+                <%- name%>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="index-text col-sm-4">Email:</div>
+            <div class="content-text col-sm-8">
+                <%- email%>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="index-text  col-sm-4">Profile:</div>
+            <div class="content-text col-sm-8">
+                <%- profile%>
+            </div>
+        </div>
     </div>
 
 </main>  <!-- container-fluid -->
 <!-- load scripts last for better UI performance -->
 <footer class="footer" >
-    <p>&copy; Ryan Pan</p></footer>
+    <p>&copy; Ryan Pan, FullStack Assignment</p></footer>
 
 <!-- library scripts you use -->
 </body>

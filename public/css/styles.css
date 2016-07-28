@@ -1,0 +1,61 @@
+#movie-icon{
+    height:20px;
+    float: left;
+    /*padding-left: 10px;*/
+}
+
+.login-btn{
+    border-spacing: 0px;
+    color:black;
+    background-color: #FFB266;
+    border-color: #CC6600;
+    border-width: 3px;
+    border-radius: 4px;
+    vertical-align: middle;
+    text-align: center;
+    font-family: Arvo;
+    max-width: 200px;
+}
+
+.footer{
+    position: relative;
+    font-size:115%;
+    background-color: #999999;
+    font-family: Avro;
+    color:white ;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.middle-div{
+    padding-top: 40px;
+    margin: auto;
+    vertical-align: middle;
+    display: table;
+    position: relative;
+}
+
+.error-text{
+    color:red;
+    font-style:italic;
+    font-family: Avro;
+    font-size: 130%;
+}
+
+.index-text{
+    color:black;
+    font-weight: bold;
+    font-family: Avro;
+    text-align: right;
+    font-size:130%;
+}
+
+.content-text{
+    font-size:130%;
+    background-color: #cccccc;
+    border: #737373 solid 2px;
+    border-radius: 4px;
+    font-size:110%;
+    margin-bottom: 20px;
+    text-align:center;
+}
